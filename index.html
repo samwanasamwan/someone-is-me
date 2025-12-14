@@ -360,8 +360,8 @@
           index++;
 
           // kalau sudah submit & mau ke slide 5, lompat
-          if (isSubmitted && index === 4) {
-            index = 5;
+          if (isSubmitted && index === 5) {
+            index = 4;
           }
 
           updateCarousel();
@@ -373,8 +373,8 @@
           index--;
 
           // kalau sudah submit & mau balik ke slide 5, lompat
-          if (isSubmitted && index === 4) {
-            index = 3;
+          if (isSubmitted && index === 5) {
+            index = 4;
           }
 
           updateCarousel();
@@ -402,7 +402,7 @@
 
       function goToLastSlide() {
         slides[4].style.display = "none";
-        index = 5;
+        index = 4;
         updateCarousel();
       }
 
