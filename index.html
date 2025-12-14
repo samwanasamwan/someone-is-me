@@ -343,88 +343,6 @@
       let redirectDone = false;
       let isSubmitted = false;
 
-      function showModal(message) {
-        modalMessage.textContent = message;
-        modal.classList.add("show");
-      }
-
-      modalClose.addEventListener("click", () => {
-        modal.classList.remove("show");
-      });
-
-      buttons.forEach((button) => {
-        button.addEventListener("click", () => {
-          buttons.forEach((btn) => btn.classList.remove("active"));
-          button.classList.add("active");
-          selectedValue = button.value;
-        });
-      });
-
-      function goToLastSlide() {
-        // sembunyikan slide 5
-        slide5.style.display = "none";
-
-        // geser langsung ke slide 6
-        index = 5;
-        updateCarousel();
-      }
-
-      function afterSuccess() {
-        if (redirectDone) return;
-        redirectDone = true;
-
-        textarea.value = "";
-        the_mail.value = "";
-        selectedValue = null;
-        buttons.forEach((btn) => btn.classList.remove("active"));
-        isSubmitted = true;
-
-        goToLastSlide();
-      }
-
-      sendButton.addEventListener("click", (e) => {
-        e.preventDefault();
-
-        if (!selectedValue) {
-          showModal("Pilih nilainya dulu ya 😊");
-          return;
-        }
-
-        if (!textarea.value.trim()) {
-          showModal("Tulis pendapat kamu dulu ya");
-          return;
-        }
-
-        const formData = new FormData();
-        formData.append("email", the_mail.value);
-        formData.append("subject", `Your Caffeine on the road!!!`);
-        formData.append(
-          "message",
-          `Rating: ${selectedValue}\nPesan: ${textarea.value}`
-        );
-
-        fetch("https://formspree.io/f/mpwvnaby", {
-          method: "POST",
-          body: formData,
-          headers: { Accept: "application/json" },
-        })
-          .then((res) => {
-            if (res.ok) {
-              showModal("Terima kasih ya… udah nyempatin waktunya 😊");
-
-              // auto pindah setelah 2.5 detik
-              setTimeout(afterSuccess, 1500);
-
-              // pindah kalau tombol close ditekan
-              const modalClose = document.getElementById("modalClose");
-              modalClose.onclick = afterSuccess;
-            } else {
-              showModal("Gagal ngirim 😢 coba lagi ya");
-            }
-          })
-          .catch(() => showModal("Koneksi lagi bermasalah 😢"));
-      });
-
       const carousel = document.getElementById("carousel");
       const prevBtn = document.getElementById("prevBtn");
       const nextBtn = document.getElementById("nextBtn");
@@ -464,10 +382,85 @@
       });
 
       updateCarousel();
+
+      function showModal(message) {
+        modalMessage.textContent = message;
+        modal.classList.add("show");
+      }
+
+      modalClose.addEventListener("click", () => {
+        modal.classList.remove("show");
+      });
+
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          buttons.forEach((btn) => btn.classList.remove("active"));
+          button.classList.add("active");
+          selectedValue = button.value;
+        });
+      });
+
+      function goToLastSlide() {
+        slides[4].style.display = "none";
+        index = 5;
+        updateCarousel();
+      }
+
+      function afterSuccess() {
+        if (redirectDone) return;
+        redirectDone = true;
+
+        textarea.value = "";
+        the_mail.value = "";
+        selectedValue = null;
+        buttons.forEach((btn) => btn.classList.remove("active"));
+        isSubmitted = true;
+
+        goToLastSlide();
+      }
+
+      sendButton.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        if (!selectedValue) {
+          showModal("Pilih nilainya dulu ya 😊");
+          return;
+        }
+
+        if (!textarea.value.trim()) {
+          showModal("Tulis pendapat kamu dulu ya");
+          return;
+        }
+
+        const formData = new FormData();
+        formData.append("email", the_mail.value);
+        formData.append("subject", `Rating: ${selectedValue}`);
+        formData.append(
+          "message",
+          `Rating: ${selectedValue}\nPesan: ${textarea.value}`
+        );
+
+        fetch("https://formspree.io/f/mpwvnaby", {
+          method: "POST",
+          body: formData,
+          headers: { Accept: "application/json" },
+        })
+          .then((res) => {
+            if (res.ok) {
+              showModal("Terima kasih ya… udah nyempatin waktunya 😊");
+
+              // auto pindah setelah 2.5 detik
+              setTimeout(afterSuccess, 2500);
+
+              // pindah kalau tombol close ditekan
+              const modalClose = document.getElementById("modalClose");
+              modalClose.onclick = afterSuccess;
+            } else {
+              showModal("Gagal ngirim 😢 coba lagi ya");
+            }
+          })
+          .catch(() => showModal("Koneksi lagi bermasalah 😢"));
+      });
     </script>
   </body>
 </html>
-
-
-
-
