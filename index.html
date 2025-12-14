@@ -354,6 +354,10 @@
           (s) => s.style.display !== "none"
         );
 
+        if (index > visibleSlides.length - 1) {
+          index = visibleSlides.length - 1;
+        }
+
         carousel.style.transform = `translateX(-${index * 100}vw)`;
         prevBtn.classList.toggle("hidden", index === 0);
         nextBtn.classList.toggle("hidden", index === visibleSlides.length - 1);
