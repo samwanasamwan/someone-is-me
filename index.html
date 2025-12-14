@@ -364,14 +364,12 @@
       }
 
       nextBtn.addEventListener("click", () => {
-        if (index < slides.length - 1) {
+        const visibleSlides = Array.from(slides).filter(
+          (s) => s.style.display !== "none"
+        );
+
+        if (index < visibleSlides.length - 1) {
           index++;
-
-          // kalau sudah submit & mau ke slide 5, lompat
-          if (isSubmitted && index === 5) {
-            index = 4;
-          }
-
           updateCarousel();
         }
       });
@@ -379,12 +377,6 @@
       prevBtn.addEventListener("click", () => {
         if (index > 0) {
           index--;
-
-          // kalau sudah submit & mau balik ke slide 5, lompat
-          if (isSubmitted && index === 5) {
-            index = 4;
-          }
-
           updateCarousel();
         }
       });
