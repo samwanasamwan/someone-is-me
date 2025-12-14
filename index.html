@@ -15,10 +15,9 @@
 
       .carousel {
         display: flex;
-        width: calc(100vw * 4); /* 3 adalah jumlah slide */
+        width: calc(100vw * 6);
         height: 100vh;
         transition: transform 0.4s ease;
-        overflow: hidden; /* Mencegah konten melampaui batas */
       }
 
       section {
@@ -44,31 +43,31 @@
       }
 
       p {
-        max-width: 36rem;
-        margin: 0.3rem 0;
-        line-height: 1.5;
+        max-width: 40rem;
+        margin: 0.35rem 0;
+        line-height: 1.55;
       }
 
-      /* navigation buttons */
       .nav {
         position: fixed;
         top: 50%;
         transform: translateY(-50%);
-        background: rgba(0, 0, 0, 0.4);
+        background: rgba(0, 0, 0, 0.35);
         color: white;
         border: none;
-        font-size: 1.5rem;
-        padding: 0.75rem 1rem;
+        font-size: 1.6rem;
+        padding: 0.7rem 1rem;
         cursor: pointer;
         z-index: 10;
+        border-radius: 50%;
       }
 
       .nav.left {
-        left: 0.5rem;
+        left: 0.6rem;
       }
 
       .nav.right {
-        right: 0.5rem;
+        right: 0.6rem;
       }
 
       .nav.hidden {
@@ -96,18 +95,34 @@
       }
 
       #buttonGroup button {
-        padding: 0.75rem 0;
-        border: 2px solid #007bff;
-        background-color: white;
-        color: #007bff;
+        padding: 0.7rem 0;
+        border: 2px solid #e6863b;
+        background-color: #fffaf6; /* hampir putih */
+        color: #8a4f1d; /* coklat muda */
         cursor: pointer;
-        border-radius: 0.5rem;
+        border-radius: 0.6rem;
         font-weight: bold;
+        transition: 0.2s;
+      }
+
+      #buttonGroup button:hover {
+        background-color: #fbe3cf; /* hover lembut */
       }
 
       #buttonGroup button.active {
-        background-color: #007bff;
-        color: white;
+        background-color: #3f2a1d; /* coklat tua → kontras kuat */
+        color: #ffffff !important;
+        border-color: #3f2a1d;
+      }
+
+      /* khusus section background orange */
+      section:nth-of-type(odd) #buttonGroup button {
+        border-color: #ffffff;
+        color: #5a3317;
+      }
+
+      section:nth-of-type(odd) #buttonGroup button:hover {
+        background-color: rgba(255, 255, 255, 0.85);
       }
 
       textarea,
@@ -115,20 +130,92 @@
         width: 100%;
         max-width: 30rem;
         padding: 0.75rem;
-        border-radius: 0.5rem;
-        border: 2px solid #ccc;
-        margin-bottom: 1rem;
+        border-radius: 0.6rem;
+        border: 2px solid #e6863b;
+        margin-bottom: 0.8rem;
         font-size: 1rem;
       }
 
+      section:nth-of-type(odd) textarea,
+      section:nth-of-type(odd) input {
+        border-color: white;
+      }
+
       #sendButton {
-        padding: 0.75rem 1.5rem;
+        padding: 0.75rem 1.6rem;
         border: none;
-        border-radius: 0.5rem;
-        background-color: #007bff;
+        border-radius: 0.6rem;
+        background-color: #5c3a21;
         color: white;
         font-weight: bold;
         cursor: pointer;
+        font-size: 1rem;
+        transition: 0.2s;
+      }
+
+      #sendButton:hover {
+        background-color: #4a2f1a; /* lebih gelap dikit pas hover */
+      }
+
+      /* ===== MODAL ===== */
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: 0.25s;
+        z-index: 99;
+      }
+
+      .modal-overlay.show {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .modal {
+        background: #fff;
+        color: #4a2f1a;
+        padding: 1.5rem;
+        border-radius: 0.9rem;
+        max-width: 22rem;
+        width: 85%;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        animation: pop 0.25s ease;
+      }
+
+      @keyframes pop {
+        from {
+          transform: scale(0.9);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      .modal p {
+        margin-bottom: 1.2rem;
+        line-height: 1.5;
+      }
+
+      .modal button {
+        padding: 0.6rem 1.4rem;
+        border: none;
+        border-radius: 0.6rem;
+        background-color: #5c3a21;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .modal button:hover {
+        background-color: #4a2f1a;
       }
     </style>
   </head>
@@ -139,75 +226,230 @@
     <div class="carousel" id="carousel">
       <!-- SLIDE 1 -->
       <section>
-        <img src="greet.gif" alt="" width="330">
-        <h1>Hai 👋</h1>
-        <p>Kamu udah scan QR code ini.</p>
-        <p>Geser ke kanan yaa.</p>
+        <img src="greet.gif" alt="" width="330" />
+        <h1>Haloo kamu!</h1>
+        <p>Ciee... yang kepo sampe scan QR-nya</p>
+        <p>Yuk geser ke kanan ➔</p>
       </section>
 
       <!-- SLIDE 2 -->
       <section>
-        <h1>Halo kamu</h1>
-        <p>Aku bikin website kecil ini khusus buat kamu.</p>
+        <img src="good.gif" alt="" width="200" />
+        <h1>Hai kamu</h1>
+        <p>Aku bikin hal kecil ini buat kamu</p>
         <p>
-          Jujur agak random sih dapet sesuatu kayak gini dari orang yang belum
-          kamu kenal banget.
+          Jujur aja, ini agak random sih. Tiba-tiba kepikiran aja bikin beginian
         </p>
         <p>
-          Kalau ini bikin kamu risih, aku minta maaf ya. Tapi aku pengen tau
-          pendapat kamu.
+          Mungkin juga agak aneh dapet sesuatu kayak gini dari orang yang belum
+          kamu kenal dekat
         </p>
+        <p>Kalau ini bikin kamu risih, aku bener-bener minta maaf ya</p>
       </section>
 
       <!-- SLIDE 3 -->
       <section>
-        <h1>Menurut kamu gimana?</h1>
-        <p>Kasih nilai dari 1 sampai 10 dulu ya.</p>
+        <h1>Kenapa aku bikin ini?</h1>
+        <p>Sejujurnya ini pertama kalinya aku ngelakuin hal kayak gini</p>
+        <p>
+          Kamu jadi orang pertama yang lihat hasil usaha aku, meskipun simpel
+          banget
+        </p>
+        <p>
+          Eh… tapi sebenernya yang pertama lihat ya aku sendiri sih, kan yang
+          bikin juga 😂
+        </p>
+        <p>
+          Walaupun yang pertama lihat pastinya aku, tapi yang paling penting
+          sekarang kamu
+        </p>
+        <p>
+          Maaf ya kalau kelihatannya biasa aja… aku cuma pengen ngasih sesuatu
+          yang tulus
+        </p>
+      </section>
+
+      <!-- SLIDE 4 -->
+      <section>
+        <img src="parfume.png" alt="" width="200" />
+        <h1>Soal parfumnya…</h1>
+        <p>
+          Mungkin di awal baunya agak tegas, tapi lama-lama bakal berubah jadi
+          lebih manis dan kalem
+        </p>
+        <p>Cocok dipakai malam hari atau acara yang agak formal</p>
+        <p>
+          Aku cuma pengen ngasih sesuatu yang bisa kamu pakai dan kepake
+          nantinya
+        </p>
+        <p>
+          Kalau kamu mau, nanti kamu bisa ceritain pendapat kamu di slide
+          berikutnya
+        </p>
+      </section>
+
+      <!-- SLIDE 5 -->
+      <section>
+        <h1>Kalau menurut kamu?</h1>
+        <p>Dari skala 1 sampai 10… aku dapet nilai berapa?</p>
 
         <div id="buttonGroup">
-          <button value="1">1</button>
-          <button value="2">2</button>
-          <button value="3">3</button>
-          <button value="4">4</button>
-          <button value="5">5</button>
-          <button value="6">6</button>
-          <button value="7">7</button>
-          <button value="8">8</button>
-          <button value="9">9</button>
-          <button value="10">10</button>
+          <button value="1">⭐1</button>
+          <button value="2">⭐2</button>
+          <button value="3">⭐3</button>
+          <button value="4">⭐4</button>
+          <button value="5">⭐5</button>
+          <button value="6">⭐6</button>
+          <button value="7">⭐7</button>
+          <button value="8">⭐8</button>
+          <button value="9">⭐9</button>
+          <button value="10">⭐10</button>
         </div>
 
         <textarea
           id="feedback"
-          placeholder="Tulis apa aja yang kamu rasain..."
+          placeholder="Tulis jujur ya… aku terima semua pendapatmu 😊"
         ></textarea>
-        <input type="email" id="the_mail" placeholder="email kamu" />
-        <button id="sendButton">Kirim</button>
+        <input
+          type="email"
+          id="the_mail"
+          placeholder="Email kamu (kalau kamu mau, aku bales kok)"
+        />
+        <button id="sendButton">Kirim ➤</button>
       </section>
 
+      <!-- SLIDE 6 -->
       <section>
+        <img src="thanks.gif" alt="" />
         <h1>Happy Valentine’s Day ❤️</h1>
+        <p>Terima kasih ya udah nyempetin baca sampai sini</p>
       </section>
     </div>
 
+    <div class="modal-overlay" id="modal">
+      <div class="modal">
+        <p id="modalMessage"></p>
+        <button id="modalClose">Oke</button>
+      </div>
+    </div>
+
     <script>
+      const buttons = document.querySelectorAll("#buttonGroup button");
+      const textarea = document.getElementById("feedback");
+      const the_mail = document.getElementById("the_mail");
+      const sendButton = document.getElementById("sendButton");
+      let selectedValue = null;
+
+      const modal = document.getElementById("modal");
+      const modalMessage = document.getElementById("modalMessage");
+      const modalClose = document.getElementById("modalClose");
+
+      let redirectDone = false;
+      let isSubmitted = false;
+
+      function showModal(message) {
+        modalMessage.textContent = message;
+        modal.classList.add("show");
+      }
+
+      modalClose.addEventListener("click", () => {
+        modal.classList.remove("show");
+      });
+
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          buttons.forEach((btn) => btn.classList.remove("active"));
+          button.classList.add("active");
+          selectedValue = button.value;
+        });
+      });
+
+      function goToLastSlide() {
+        // sembunyikan slide 5
+        slide5.style.display = "none";
+
+        // geser langsung ke slide 6
+        index = 5;
+        updateCarousel();
+      }
+
+      function afterSuccess() {
+        if (redirectDone) return;
+        redirectDone = true;
+
+        textarea.value = "";
+        the_mail.value = "";
+        selectedValue = null;
+        buttons.forEach((btn) => btn.classList.remove("active"));
+        isSubmitted = true;
+
+        goToLastSlide();
+      }
+
+      sendButton.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        if (!selectedValue) {
+          showModal("Pilih nilainya dulu ya 😊");
+          return;
+        }
+
+        if (!textarea.value.trim()) {
+          showModal("Tulis pendapat kamu dulu ya");
+          return;
+        }
+
+        const formData = new FormData();
+        formData.append("email", the_mail.value);
+        formData.append("subject", `Rating: ${selectedValue}`);
+        formData.append(
+          "message",
+          `Rating: ${selectedValue}\nPesan: ${textarea.value}`
+        );
+
+        fetch("https://formspree.io/f/mpwvnaby", {
+          method: "POST",
+          body: formData,
+          headers: { Accept: "application/json" },
+        })
+          .then((res) => {
+            if (res.ok) {
+              showModal("Terima kasih ya… udah nyempatin waktunya 😊");
+
+              // auto pindah setelah 2.5 detik
+              setTimeout(afterSuccess, 2500);
+
+              // pindah kalau tombol close ditekan
+              const modalClose = document.getElementById("modalClose");
+              modalClose.onclick = afterSuccess;
+            } else {
+              showModal("Gagal ngirim 😢 coba lagi ya");
+            }
+          })
+          .catch(() => showModal("Koneksi lagi bermasalah 😢"));
+      });
+
       const carousel = document.getElementById("carousel");
       const prevBtn = document.getElementById("prevBtn");
       const nextBtn = document.getElementById("nextBtn");
       const slides = document.querySelectorAll("section");
       let index = 0;
 
-      // Fungsi untuk memperbarui posisi carousel
       function updateCarousel() {
         carousel.style.transform = `translateX(-${index * 100}vw)`;
         prevBtn.classList.toggle("hidden", index === 0);
         nextBtn.classList.toggle("hidden", index === slides.length - 1);
       }
 
-      // Event untuk tombol navigasi
       nextBtn.addEventListener("click", () => {
         if (index < slides.length - 1) {
           index++;
+
+          // kalau sudah submit & mau ke slide 5, lompat
+          if (isSubmitted && index === 4) {
+            index = 5;
+          }
+
           updateCarousel();
         }
       });
@@ -215,13 +457,17 @@
       prevBtn.addEventListener("click", () => {
         if (index > 0) {
           index--;
+
+          // kalau sudah submit & mau balik ke slide 5, lompat
+          if (isSubmitted && index === 4) {
+            index = 3;
+          }
+
           updateCarousel();
         }
       });
 
-      // Inisialisasi carousel
       updateCarousel();
     </script>
   </body>
 </html>
-
