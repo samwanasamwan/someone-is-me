@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>What Do You Think?</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        overflow: hidden;
+      }
+
+      .carousel {
+        display: flex;
+        width: calc(100vw * 4); /* 3 adalah jumlah slide */
+        height: 100vh;
+        transition: transform 0.4s ease;
+        overflow: hidden; /* Mencegah konten melampaui batas */
+      }
+
+      section {
+        width: 100vw;
+        height: 100vh;
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 1.5rem;
+        box-sizing: border-box;
+        text-align: center;
+      }
+
+      section:nth-of-type(odd) {
+        background-color: #e6863b;
+        color: white;
+      }
+
+      h1 {
+        margin-bottom: 0.5rem;
+      }
+
+      p {
+        max-width: 36rem;
+        margin: 0.3rem 0;
+        line-height: 1.5;
+      }
+
+      /* navigation buttons */
+      .nav {
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.4);
+        color: white;
+        border: none;
+        font-size: 1.5rem;
+        padding: 0.75rem 1rem;
+        cursor: pointer;
+        z-index: 10;
+      }
+
+      .nav.left {
+        left: 0.5rem;
+      }
+
+      .nav.right {
+        right: 0.5rem;
+      }
+
+      .nav.hidden {
+        display: none;
+      }
+
+      #buttonGroup {
+        display: grid;
+        gap: 0.5rem;
+        width: 100%;
+        max-width: 30rem;
+        margin: 1rem 0;
+      }
+
+      @media (max-width: 768px) {
+        #buttonGroup {
+          grid-template-columns: repeat(5, 1fr);
+        }
+      }
+
+      @media (min-width: 769px) {
+        #buttonGroup {
+          grid-template-columns: repeat(10, 1fr);
+        }
+      }
+
+      #buttonGroup button {
+        padding: 0.75rem 0;
+        border: 2px solid #007bff;
+        background-color: white;
+        color: #007bff;
+        cursor: pointer;
+        border-radius: 0.5rem;
+        font-weight: bold;
+      }
+
+      #buttonGroup button.active {
+        background-color: #007bff;
+        color: white;
+      }
+
+      textarea,
+      input {
+        width: 100%;
+        max-width: 30rem;
+        padding: 0.75rem;
+        border-radius: 0.5rem;
+        border: 2px solid #ccc;
+        margin-bottom: 1rem;
+        font-size: 1rem;
+      }
+
+      #sendButton {
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 0.5rem;
+        background-color: #007bff;
+        color: white;
+        font-weight: bold;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <button class="nav left hidden" id="prevBtn">‹</button>
+    <button class="nav right" id="nextBtn">›</button>
+
+    <div class="carousel" id="carousel">
+      <!-- SLIDE 1 -->
+      <section>
+        <img src="greet.gif" alt="" width="330">
+        <h1>Hai 👋</h1>
+        <p>Kamu udah scan QR code ini.</p>
+        <p>Geser ke kanan yaa.</p>
+      </section>
+
+      <!-- SLIDE 2 -->
+      <section>
+        <h1>Halo kamu</h1>
+        <p>Aku bikin website kecil ini khusus buat kamu.</p>
+        <p>
+          Jujur agak random sih dapet sesuatu kayak gini dari orang yang belum
+          kamu kenal banget.
+        </p>
+        <p>
+          Kalau ini bikin kamu risih, aku minta maaf ya. Tapi aku pengen tau
+          pendapat kamu.
+        </p>
+      </section>
+
+      <!-- SLIDE 3 -->
+      <section>
+        <h1>Menurut kamu gimana?</h1>
+        <p>Kasih nilai dari 1 sampai 10 dulu ya.</p>
+
+        <div id="buttonGroup">
+          <button value="1">1</button>
+          <button value="2">2</button>
+          <button value="3">3</button>
+          <button value="4">4</button>
+          <button value="5">5</button>
+          <button value="6">6</button>
+          <button value="7">7</button>
+          <button value="8">8</button>
+          <button value="9">9</button>
+          <button value="10">10</button>
+        </div>
+
+        <textarea
+          id="feedback"
+          placeholder="Tulis apa aja yang kamu rasain..."
+        ></textarea>
+        <input type="email" id="the_mail" placeholder="email kamu" />
+        <button id="sendButton">Kirim</button>
+      </section>
+
+      <section>
+        <h1>Happy Valentine’s Day ❤️</h1>
+      </section>
+    </div>
+
+    <script>
+      const carousel = document.getElementById("carousel");
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+      const slides = document.querySelectorAll("section");
+      let index = 0;
+
+      // Fungsi untuk memperbarui posisi carousel
+      function updateCarousel() {
+        carousel.style.transform = `translateX(-${index * 100}vw)`;
+        prevBtn.classList.toggle("hidden", index === 0);
+        nextBtn.classList.toggle("hidden", index === slides.length - 1);
+      }
+
+      // Event untuk tombol navigasi
+      nextBtn.addEventListener("click", () => {
+        if (index < slides.length - 1) {
+          index++;
+          updateCarousel();
+        }
+      });
+
+      prevBtn.addEventListener("click", () => {
+        if (index > 0) {
+          index--;
+          updateCarousel();
+        }
+      });
+
+      // Variabel untuk swipe gesture
+      let startX = 0;
+      let endX = 0;
+
+      // Event untuk mendeteksi swipe
+      carousel.addEventListener("touchstart", (e) => {
+        startX = e.touches[0].clientX; // Posisi awal sentuhan
+      });
+
+      carousel.addEventListener("touchmove", (e) => {
+        endX = e.touches[0].clientX; // Posisi saat ini saat bergerak
+      });
+
+      carousel.addEventListener("touchend", () => {
+        const threshold = 50; // Jarak minimum untuk mendeteksi swipe
+        if (startX - endX > threshold && index < slides.length - 1) {
+          // Geser ke kiri
+          index++;
+          updateCarousel();
+        } else if (endX - startX > threshold && index > 0) {
+          // Geser ke kanan
+          index--;
+          updateCarousel();
+        }
+      });
+
+      // Inisialisasi carousel
+      updateCarousel();
+    </script>
+  </body>
+</html>
