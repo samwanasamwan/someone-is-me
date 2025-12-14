@@ -219,34 +219,9 @@
         }
       });
 
-      // Variabel untuk swipe gesture
-      let startX = 0;
-      let endX = 0;
-
-      // Event untuk mendeteksi swipe
-      carousel.addEventListener("touchstart", (e) => {
-        startX = e.touches[0].clientX; // Posisi awal sentuhan
-      });
-
-      carousel.addEventListener("touchmove", (e) => {
-        endX = e.touches[0].clientX; // Posisi saat ini saat bergerak
-      });
-
-      carousel.addEventListener("touchend", () => {
-        const threshold = 50; // Jarak minimum untuk mendeteksi swipe
-        if (startX - endX > threshold && index < slides.length - 1) {
-          // Geser ke kiri
-          index++;
-          updateCarousel();
-        } else if (endX - startX > threshold && index > 0) {
-          // Geser ke kanan
-          index--;
-          updateCarousel();
-        }
-      });
-
       // Inisialisasi carousel
       updateCarousel();
     </script>
   </body>
 </html>
+
