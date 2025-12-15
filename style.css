@@ -1,0 +1,294 @@
+@font-face {
+    font-family: 'indie_flowerregular';
+    src: url('fonts/indieflower-webfont.woff2') format('woff2'),
+         url('fonts/indieflower-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'pacificoregular';
+    src: url('fonts/pacifico-webfont.woff2') format('woff2'),
+         url('fonts/pacifico-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'q_212regular';
+    src: url('fonts/q212-webfont.woff2') format('woff2'),
+         url('fonts/q212-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+.valentine-greeting {
+    font-family: 'pacificoregular', cursive;
+}
+
+.header-text {
+    font-family: 'q_212regular', cursive;
+}
+
+.subtitle-text {
+    font-family: 'indie_flowerregular', sans-serif;
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+}
+
+.carousel {
+  display: flex;
+  width: calc(100vw * 6);
+  height: 100vh;
+  transition: transform 0.4s ease;
+}
+
+section {
+  width: 100vw;
+  height: 100vh;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+section:nth-of-type(odd) {
+  background-color: #e6863b;
+  color: white;
+}
+
+h1 {
+  margin-bottom: 0.5rem;
+}
+
+p {
+  max-width: 40rem;
+  margin: 0.35rem 0;
+  line-height: 1.55;
+}
+
+.nav {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.35);
+  color: white;
+  border: none;
+  font-size: 1.6rem;
+  padding: 0.7rem 1rem;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 50%;
+}
+
+.nav.left {
+  left: 0.6rem;
+}
+
+.nav.right {
+  right: 0.6rem;
+}
+
+.nav.hidden {
+  display: none;
+}
+
+#buttonGroup {
+  display: grid;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 30rem;
+  margin: 1rem 0;
+}
+
+@media (max-width: 768px) {
+  #buttonGroup {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (min-width: 769px) {
+  #buttonGroup {
+    grid-template-columns: repeat(10, 1fr);
+  }
+}
+
+#buttonGroup button {
+  padding: 0.7rem 0;
+  border: 2px solid #e6863b;
+  background-color: #fffaf6; /* hampir putih */
+  color: #8a4f1d; /* coklat muda */
+  cursor: pointer;
+  border-radius: 0.6rem;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+#buttonGroup button:hover {
+  background-color: #fbe3cf; /* hover lembut */
+}
+
+#buttonGroup button.active {
+  background-color: #3f2a1d; /* coklat tua → kontras kuat */
+  color: #ffffff !important;
+  border-color: #3f2a1d;
+}
+
+/* khusus section background orange */
+section:nth-of-type(odd) #buttonGroup button {
+  border-color: #ffffff;
+  color: #5a3317;
+}
+
+section:nth-of-type(odd) #buttonGroup button:hover {
+  background-color: rgba(255, 255, 255, 0.85);
+}
+
+textarea,
+input {
+  width: 100%;
+  max-width: 30rem;
+  padding: 0.75rem;
+  border-radius: 0.6rem;
+  border: 2px solid #e6863b;
+  margin-bottom: 0.8rem;
+  font-size: 1rem;
+}
+
+section:nth-of-type(odd) textarea,
+section:nth-of-type(odd) input {
+  border-color: white;
+}
+
+#sendButton {
+  padding: 0.75rem 1.6rem;
+  border: none;
+  border-radius: 0.6rem;
+  background-color: #5c3a21;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: 0.2s;
+}
+
+#sendButton:hover {
+  background-color: #4a2f1a; /* lebih gelap dikit pas hover */
+}
+
+/* ===== MODAL ===== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.25s;
+  z-index: 99;
+}
+
+.modal-overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal {
+  background: #fff;
+  color: #4a2f1a;
+  padding: 1.5rem;
+  border-radius: 0.9rem;
+  max-width: 22rem;
+  width: 85%;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  animation: pop 0.25s ease;
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.modal p {
+  margin-bottom: 1.2rem;
+  line-height: 1.5;
+}
+
+.modal button {
+  padding: 0.6rem 1.4rem;
+  border: none;
+  border-radius: 0.6rem;
+  background-color: #5c3a21;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.modal button:hover {
+  background-color: #4a2f1a;
+}
+
+/* Loading */
+@keyframes ldio-x2uulkbinc {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+.ldio-x2uulkbinc div {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  border: 20px solid #ffffff;
+  border-top-color: transparent;
+  border-radius: 50%;
+}
+.ldio-x2uulkbinc div {
+  animation: ldio-x2uulkbinc 1.8867924528301885s linear infinite;
+  top: 100px;
+  left: 100px;
+}
+.loadingio-spinner-rolling-nq4q5u6dq7r {
+  width: 1.4em;
+  height: 1.4em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ldio-x2uulkbinc {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform: translateZ(0) scale(1);
+  backface-visibility: hidden;
+  transform-origin: 0 0; /* see note above */
+}
+.ldio-x2uulkbinc div {
+  box-sizing: content-box;
+}
+/* [ldio] generated by https://loading.io */
