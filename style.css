@@ -1,6 +1,7 @@
 @font-face {
     font-family: 'indie_flowerregular';
-    src: url('fonts/indieflower-webfont.woff2') format('woff2'),
+    src: url('fonts/indieflower-webfont.ttf') format('ttf'),
+         url('fonts/indieflower-webfont.woff2') format('woff2'),
          url('fonts/indieflower-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
@@ -9,7 +10,8 @@
 
 @font-face {
     font-family: 'pacificoregular';
-    src: url('fonts/pacifico-webfont.woff2') format('woff2'),
+    src: url('fonts/pacifico-webfont.ttf') format('ttf'),
+         url('fonts/pacifico-webfont.woff2') format('woff2'),
          url('fonts/pacifico-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
@@ -18,7 +20,8 @@
 
 @font-face {
     font-family: 'q_212regular';
-    src: url('fonts/q212-webfont.woff2') format('woff2'),
+    src: url('fonts/q212-webfont.ttf') format('ttf'),
+         url('fonts/q212-webfont.woff2') format('woff2'),
          url('fonts/q212-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
