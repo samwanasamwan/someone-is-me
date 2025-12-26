@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>What Do You Think?</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css">
+    <script src="main.js" defer></script>
+  </head>
+  <body>
+    <button class="nav left hidden" id="prevBtn">‹</button>
+    <button class="nav right" id="nextBtn">›</button>
+
+    <div class="carousel" id="carousel">
+      <!-- SLIDE 1 -->
+      <section>
+        <img src="greet.gif" alt="" width="330" />
+        <h1 class="header-text">Haloo kamu!</h1>
+        <p class="subtitle-text">Ciee... yang kepo sampe scan QR-nya</p>
+        <p class="subtitle-text">Yuk geser ke kanan ➔</p>
+      </section>
+
+      <!-- SLIDE 2 -->
+      <section>
+        <img src="good.gif" alt="" width="200" />
+        <h1 class="header-text">Hai kamu</h1>
+        <p class="subtitle-text">Aku bikinin ini buat kamu</p>
+        <p class="subtitle-text">
+          Jujur agak random sih. Tiba-tiba kepikiran aja bikin beginian, rasanya tuh kayak "bikin apa lagi yaaa?!!"
+        </p>
+        <p class="subtitle-text">
+          Mungkin agak aneh dapet sesuatu kayak gini dari orang yang belum
+          kamu kenal dekat
+        </p>
+        <p class="subtitle-text">Kalau ini bikin kamu risih, aku bener-bener minta maaf ya</p>
+      </section>
+
+      <!-- SLIDE 3 -->
+      <section>
+        <h1 class="header-text">Kenapa aku bikin ini?</h1>
+        <p class="subtitle-text">Jujur ini pertama kalinya aku bikin kayak gini, jadi 
+          aku juga pengen coba hal baru yang belum pernah kulakuin sebelumnya</p>
+        <p class="subtitle-text">
+          Btw, tau gak? kamu itu orang pertama yang lihat aku bikin sesuatu kayak gini. Eh… tapi sebenernya yang pertama lihat ya aku sendiri sih, 
+          kan aku yang bikin hahaha 😂
+        </p>
+        <p class="subtitle-text">
+          Maaf ya kalau kelihatannya biasa aja… aku cuma pengen ngasih sesuatu
+          yang tulus gituu...
+        </p>
+      </section>
+
+      <!-- SLIDE 4 -->
+      <section>
+        <img src="parfume.png" alt="" width="200" />
+        <h1 class="header-text">Soal parfumnya…</h1>
+        <p class="subtitle-text">
+          Jujur aku pertama kali beli parfum ini, aku pun gak tau parfum ini seperti apa wanginya
+        </p>
+        <p>Kalau menurutku sih wangi parfumnya itu seperti manis, seger, tapi juga elegan kalau dipakai</p>
+        <p class="subtitle-text">Menurutku parfum ini cocok dipakai all day siih, jadi dari pagi sampai malam masih cocok dipakai</p>
+        <p class="subtitle-text">
+          Aku cuma pengen ngasih sesuatu yang bisa kamu pakai dan kepake
+          nantinya
+        </p>
+        <p class="subtitle-text">
+          Kalau boleeh, nanti bisa ceritain pendapat kamu di slide
+          berikutnya hehehe
+        </p>
+      </section>
+
+      <!-- SLIDE 5 -->
+      <section>
+        <h1 class="header-text">Kalau menurut kamu?</h1>
+        <p class="subtitle-text">Dari skala 1 sampai 10… aku dapet nilai berapa?</p>
+
+        <div id="buttonGroup">
+          <button value="1">⭐1</button>
+          <button value="2">⭐2</button>
+          <button value="3">⭐3</button>
+          <button value="4">⭐4</button>
+          <button value="5">⭐5</button>
+          <button value="6">⭐6</button>
+          <button value="7">⭐7</button>
+          <button value="8">⭐8</button>
+          <button value="9">⭐9</button>
+          <button value="10">⭐10</button>
+        </div>
+
+        <textarea
+          id="feedback"
+          placeholder="Tulis jujur ya… aku terima semua pendapatmu 😊"
+        ></textarea>
+        <input
+          type="email"
+          id="the_mail"
+          placeholder="Email kamu (kalau kamu mau, aku bales kok)"
+        />
+        <button id="sendButton">Kirim ➤</button>
+      </section>
+
+      <!-- SLIDE 6 -->
+      <section>
+        <img src="thanks.gif" alt="" />
+        <h1 class="valentine-greeting">Happy Valentine’s Day ❤️</h1>
+        <p class="subtitle-text">Terima kasih ya udah nyempetin baca sampai sini</p>
+      </section>
+    </div>
+
+    <div class="modal-overlay" id="modal">
+      <div class="modal">
+        <p id="modalMessage"></p>
+        <button id="modalClose" type="button">Oke</button>
+      </div>
+    </div>
+  </body>
+</html>
+
+
