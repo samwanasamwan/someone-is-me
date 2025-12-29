@@ -68,14 +68,11 @@ document.addEventListener("DOMContentLoaded", () => {
   })
     .then((res) => {
       if (res.ok) {
-        showModal("Terima kasih ya… udah nyempatin waktunya 😊");
-        setTimeout(afterSuccess, 2500);
-        modalClose.onclick = afterSuccess;
+        
       } else {
-        showModal("Gagal ngirim 😢 coba lagi ya");
+        
       }
     })
-    .catch(() => showModal("Koneksi lagi bermasalah 😢"));
 });
 
       function showModal(message) {
@@ -173,6 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
           .catch(() => showModal("Koneksi lagi bermasalah 😢"));
 
       });
+
 
 
 
