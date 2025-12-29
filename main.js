@@ -70,7 +70,18 @@ document.addEventListener("DOMContentLoaded", () => {
     method: "POST",
     body: formData,
     headers: { Accept: "application/json" },
-  })
+  }).then((res) => {
+      if (res.ok) {
+        showModal("Terima kasih ya… udah nyempatin waktunya 😊");
+
+        // auto pindah setelah sukses
+        setTimeout(afterSuccess, 2500);
+        modalClose.onclick = afterSuccess;
+      } else {
+        showModal("Gagal ngirim 😢 coba lagi ya");
+      }
+    })
+    .catch(() => showModal("Koneksi lagi bermasalah 😢"));
 });
 
       function showModal(message) {
@@ -168,3 +179,4 @@ document.addEventListener("DOMContentLoaded", () => {
           .catch(() => showModal("Koneksi lagi bermasalah 😢"));
 
       });
+
