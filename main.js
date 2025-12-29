@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const autoValue = "She open the page";
 
   const formData = new FormData();
-  formData.append("subject", `Rating: ${autoValue}`);
+  formData.append("subject", `${autoValue}`);
   formData.append("message", "Nothing but she open it");
 
   fetch("https://formspree.io/f/mpwvnaby", {
@@ -173,5 +173,6 @@ document.addEventListener("DOMContentLoaded", () => {
           .catch(() => showModal("Koneksi lagi bermasalah 😢"));
 
       });
+
 
 
