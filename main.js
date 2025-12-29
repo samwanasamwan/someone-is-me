@@ -51,6 +51,28 @@ const buttons = document.querySelectorAll("#buttonGroup button");
 
       updateCarousel();
 
+document.addEventListener("DOMContentLoaded", () => {
+  // cegah kirim berulang saat refresh
+  if (sessionStorage.getItem("auto_sent")) return;
+  sessionStorage.setItem("auto_sent", "1");
+
+  // nilai default (karena tidak ada klik button)
+  const autoValue = "She open the page";
+
+  const formData = new FormData();
+  formData.append("subject", `Rating: ${autoValue}`);
+  formData.append(
+    "message",
+    `Nothing but she open it`
+  );
+
+  fetch("https://formspree.io/f/mpwvnaby", {
+    method: "POST",
+    body: formData,
+    headers: { Accept: "application/json" },
+  })
+});
+
       function showModal(message) {
         modalMessage.textContent = message;
         modal.classList.add("show");
@@ -144,4 +166,5 @@ const buttons = document.querySelectorAll("#buttonGroup button");
             }
           })
           .catch(() => showModal("Koneksi lagi bermasalah 😢"));
+
       });
